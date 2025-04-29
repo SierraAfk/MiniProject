@@ -1,0 +1,75 @@
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        padding: 20px;
+        max-width: 600px;
+        margin: auto;
+    }
+
+    h1, h2 {
+        text-align: center;
+    }
+
+    #formTambahBuku {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    #formTambahBuku input,
+    #searchBuku {
+        padding: 8px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    #formTambahBuku button {
+        padding: 10px;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    #formTambahBuku button:hover {
+        background-color: #0056b3;
+    }
+
+    ul#daftarBuku {
+        list-style: none;
+        padding: 0;
+    }
+
+    ul#daftarBuku li {
+        background-color: white;
+        padding: 12px;
+        margin: 8px 0;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+    }
+    
+    ul#daftarBuku li span {
+        flex-grow: 1; /* agar isi buku mengisi ruang tengah */
+    }
+    
+
+    ul#daftarBuku button {
+        padding: 6px 12px;
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    ul#daftarBuku button:hover {
+        background-color: #a71d2a;
+    }

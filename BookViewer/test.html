@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Contoh Tombol via JS</title>
+</head>
+<body>
+  <div id="container">
+    <p id="text">Ini adalah sebuah paragraf yang bisa dihapus.</p>
+  </div>
+
+  <script>
+    // 1. Buat elemen tombol
+    const tombolHapus = document.createElement("button");
+    tombolHapus.textContent = "Hapus";
+
+    // 2. Tambahkan event listener (aksi ketika tombol diklik)
+    tombolHapus.addEventListener("click", () => {
+      const paragraf = document.getElementById("text");
+      if (paragraf) {
+        paragraf.remove();
+      }
+    });
+
+    // 3. Sisipkan tombol ke dalam halaman (DOM)
+    const container = document.getElementById("container");
+    container.appendChild(tombolHapus);
+  </script>
+</body>
+</html>
