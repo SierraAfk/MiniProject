@@ -48,5 +48,41 @@ function tampilkanBuku(bukuList){
     })
 }
 
+// Tangkap form dan input-inputnya
+const formTambahBuku = document.getElementById("formTambahBuku");
+const inputJudul = document.getElementById("inputJudul");
+const inputPenulis = document.getElementById("inputPenulis");
+const inputTahun = document.getElementById("inputTahun");
+
+// Event saat form disubmit
+formTambahBuku.addEventListener("submit", function(event) {
+    event.preventDefault(); // Supaya tidak reload halaman
+
+    // Ambil nilai dari input
+    const judulBaru = inputJudul.value.trim();
+    const penulisBaru = inputPenulis.value.trim();
+    const tahunBaru = parseInt(inputTahun.value.trim());
+
+    // Validasi sederhana
+    if (judulBaru && penulisBaru && !isNaN(tahunBaru)) {
+        // Buat objek buku baru
+        const bukuBaru = {
+            judul: judulBaru,
+            penulis: penulisBaru,
+            tahun: tahunBaru,
+        };
+
+        // Tambahkan ke daftarBuku
+        daftarBuku.push(bukuBaru);
+
+        // Reset form
+        formTambahBuku.reset();
+
+        // Render ulang daftar buku
+        renderDaftarBuku();
+    } else {
+        alert("Mohon isi semua kolom dengan benar!");
+    }
+});
 
 console.log(daftarBuku)
