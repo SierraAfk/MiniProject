@@ -17,8 +17,20 @@
         <ul id="daftarBuku"></ul>
     </div>
 
-    <label for="searchBuku">Cari buku: </label>
-    <input type="text" id="searchBuku" placeholder="Masukkan Judul Buku">
+    <div id="filterStatus">
+        <div id="filterSection">
+            <div id="filterOptions">
+              <label><input type="radio" name="filter" value="semua" checked> Semua</label>
+              <label><input type="radio" name="filter" value="sudah"> Sudah Dibaca</label>
+              <label><input type="radio" name="filter" value="belum"> Belum Dibaca</label>
+            </div>
+          
+            <div id="searchContainer">
+              <label for="searchBuku">🔍</label>
+              <input type="text" id="searchBuku" placeholder="Cari buku...">
+            </div>
+          </div>
+          
 
     <h2>Tambah Buku Baru</h2>
     <form action="" id="formTambahBuku">
