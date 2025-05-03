@@ -42,8 +42,6 @@ filterStatusRadios.forEach(radio => {
     radio.addEventListener("change", filterDanTampilkan);
 });
 
-// update search input
-// searchInput.addEventListener("input", filterDanTampilkan);
 // tampilkan daftar buku
 function tampilkanBuku(bukuList = daftarBuku) {
     daftarBukuElement.innerHTML = "";
