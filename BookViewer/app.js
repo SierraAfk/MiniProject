@@ -105,6 +105,8 @@ function hapusBuku(index) {
     localStorage.setItem("daftarBuku", JSON.stringify(daftarBuku));
     filterDanTampilkan(); // Tampilkan ulang daftar
 };
+
+// Tambah Buku
 // Tangkap form dan input-inputnya
 const formTambahBuku = document.getElementById("formTambahBuku");
 const inputJudul = document.getElementById("inputJudul");
