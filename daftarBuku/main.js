@@ -73,6 +73,18 @@ formTambahBuku.addEventListener("submit", function(event){
     };
 });
 
+// search buku
+// ambil element input pencarian
+const searchInput = document.getElementById("cariBuku");
 
+// Event listener untuk input pencarian
+searchInput.addEventListener("input", function(){
+    const searchTerm = searchInput.value.toLowerCase();
+    const filteredBuku = daftarBuku.filter(buku => {
+        return buku.judul.toLowerCase().includes(searchTerm) || buku.penulis.toLowerCase().includes(searchTerm);
+    });
+    tampilkanBuku();
+});
+searchInput.addEventListener("input", tampilkanBuku())
 tampilkanBuku()
 console.log(daftarBuku)
