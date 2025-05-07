@@ -28,7 +28,43 @@ function tampilkanBuku(bukuList = daftarBuku){
         const span = document.createElement("span");
         span.innerText = `${buku.judul} oleh ${buku.penulis} (${buku.tahun})`;
 
-        li.appendChild(span)
+        // bikin checkbox
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = buku.sudahDibaca;
+        checkbox.style.marginRight ="10px";
+        checkbox.addEventListener("change", function(){
+            const index = daftarBuku.findIndex(b => 
+                b.judul === buku.judul &&
+                b.penulis === buku.penulis &&
+                b.tahun === buku.tahun
+            );
+            if (index !== -1){
+                daftarBuku[index].sudahDibaca = checkbox.checked;
+                localStorage.setItem("daftarBuku", JSON.stringify(daftarBuku));
+            }
+        });
+
+        // tombol hapus
+        const tombolHapus = document.createElement("button");
+        tombolHapus.innerText = "Hapus";
+        tombolHapus.addEventListener("click", function(){
+            const index = daftarBuku.findIndex(b => 
+                b.judul === buku.judul &&
+                b.penulis === buku.penulis &&
+                b.tahun === buku.tahun
+            );
+
+            if(index !== -1){
+                daftarBuku.splice(index, 1);
+                localStorage.setItem("daftarBuku", JSON.stringify(daftarBuku));
+                tampilkanBuku();
+            }
+        });
+
+        li.appendChild(span);
+        li.appendChild(tombolHapus);
+        li.appendChild(checkbox)
 
         daftarBukuElement.appendChild(li);
     });
@@ -75,7 +111,7 @@ formTambahBuku.addEventListener("submit", function(event){
 
 // search buku
 // ambil element input pencarian
-const searchInput = document.getElementById("cariBuku");
+const searchInput = document.getElementById("searchBuku");
 
 // Event listener untuk input pencarian
 searchInput.addEventListener("input", function(){
@@ -83,8 +119,10 @@ searchInput.addEventListener("input", function(){
     const filteredBuku = daftarBuku.filter(buku => {
         return buku.judul.toLowerCase().includes(searchTerm) || buku.penulis.toLowerCase().includes(searchTerm);
     });
-    tampilkanBuku();
+    tampilkanBuku(filteredBuku);
 });
-searchInput.addEventListener("input", tampilkanBuku())
-tampilkanBuku()
-console.log(daftarBuku)
+
+
+
+tampilkanBuku();
+console.log(daftarBuku);
