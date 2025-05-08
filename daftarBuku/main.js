@@ -3,21 +3,24 @@ const daftarBuku = JSON.parse(localStorage.getItem("daftarBuku")) || [
         judul: "Atomic Habits",
         penulis: "James Clear",
         tahun: 2018,
+        sudahDibaca: false
     },
     {
         judul: "The Subtle Art of Not Giving a F#ck",
         penulis: "Mark Manson",
-        tahun: 2016
+        tahun: 2016,
+        sudahDibaca: false
     },
     {
         judul: "The Catcher in the Rye",
         penulis: "J.D Salinger",
         tahun: 1951,
+        sudahDibaca: false
     },
 ];
 
 const daftarBukuElement = document.getElementById("daftarBuku");
-// tampilkanBuku();
+tampilkanBuku();
 
 // tampilkan buku
 function tampilkanBuku(bukuList = daftarBuku){
@@ -27,6 +30,11 @@ function tampilkanBuku(bukuList = daftarBuku){
         
         const span = document.createElement("span");
         span.innerText = `${buku.judul} oleh ${buku.penulis} (${buku.tahun})`;
+
+        if(buku.sudahDibaca){
+            li.style.color = "green";
+            li.style.textDecoration = "line-through"
+        }
 
         // bikin checkbox
         const checkbox = document.createElement("input");
@@ -62,9 +70,9 @@ function tampilkanBuku(bukuList = daftarBuku){
             }
         });
 
+        li.appendChild(checkbox);
         li.appendChild(span);
         li.appendChild(tombolHapus);
-        li.appendChild(checkbox)
 
         daftarBukuElement.appendChild(li);
     });
@@ -113,16 +121,40 @@ formTambahBuku.addEventListener("submit", function(event){
 // ambil element input pencarian
 const searchInput = document.getElementById("searchBuku");
 
+const filterStatusRadios = document.querySelectorAll('input[name="filter"]');
 // Event listener untuk input pencarian
 searchInput.addEventListener("input", function(){
     const searchTerm = searchInput.value.toLowerCase();
     const filteredBuku = daftarBuku.filter(buku => {
         return buku.judul.toLowerCase().includes(searchTerm) || buku.penulis.toLowerCase().includes(searchTerm);
     });
-    tampilkanBuku(filteredBuku);
+    filterDanTampilkan()
+});
+searchInput.addEventListener("input", filterDanTampilkan)
+
+// filter buku
+// event listener
+filterStatusRadios.forEach(radio => {
+    radio.addEventListener("change", filterDanTampilkan);
 });
 
 
+// update filter
+function filterDanTampilkan(){
+    const searchTerm = searchInput.value.toLowerCase();
+    const selectedFilter = document.querySelector('input[name="filter"]:checked').value;
+    
+    let filtered = daftarBuku.filter(buku => {
+        const cocokJudul = buku.judul.toLowerCase().includes(searchTerm) || buku.penulis.toLowerCase().includes(searchTerm);
+        const cocokStatus = 
+        selectedFilter === "semua" ? true :
+        selectedFilter === "sudah" ? buku.sudahDibaca :
+        !buku.sudahDibaca;
+        return cocokJudul && cocokStatus;
+        
+    });
+    tampilkanBuku(filtered)
+}
 
-tampilkanBuku();
+
 console.log(daftarBuku);

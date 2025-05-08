@@ -22,26 +22,6 @@ const daftarBuku = JSON.parse(localStorage.getItem("daftarBuku")) || [
 // Ambil elemen ul
 const daftarBukuElement = document.getElementById("daftarBuku");
 tampilkanBuku();
-
-// ambil elemen input pencarian
-const searchInput = document.getElementById("searchBuku");
-// filter
-const filterStatusRadios = document.querySelectorAll('input[name="filter"]');
-
-// Event listener untuk input pencarian
-searchInput.addEventListener("input", function(){
-    const searchTerm = searchInput.value.toLowerCase();
-    const filteredBuku = daftarBuku.filter(buku => {
-        return buku.judul.toLowerCase().includes(searchTerm) || buku.penulis.toLowerCase().includes(searchTerm);
-    });
-    filterDanTampilkan();
-});
-searchInput.addEventListener("input", filterDanTampilkan);
-
-filterStatusRadios.forEach(radio => {
-    radio.addEventListener("change", filterDanTampilkan);
-});
-
 // tampilkan daftar buku
 function tampilkanBuku(bukuList = daftarBuku) {
     daftarBukuElement.innerHTML = "";
@@ -99,6 +79,48 @@ function tampilkanBuku(bukuList = daftarBuku) {
     });
 }
 
+// ambil elemen input pencarian
+const searchInput = document.getElementById("searchBuku");
+// filter
+const filterStatusRadios = document.querySelectorAll('input[name="filter"]');
+
+// Event listener untuk input pencarian
+searchInput.addEventListener("input", function(){
+    const searchTerm = searchInput.value.toLowerCase();
+    const filteredBuku = daftarBuku.filter(buku => {
+        return buku.judul.toLowerCase().includes(searchTerm) || buku.penulis.toLowerCase().includes(searchTerm);
+    });
+    filterDanTampilkan();
+});
+searchInput.addEventListener("input", filterDanTampilkan);
+
+filterStatusRadios.forEach(radio => {
+    radio.addEventListener("change", filterDanTampilkan);
+});
+
+// loop
+filterStatusRadios.forEach(radio => {
+    radio.addEventListener("change", () => {
+        filterDanTampilkan();
+    });
+});
+
+// fungsi baru untuk menggabungkan filter judul dan status baca
+function filterDanTampilkan() {
+    const searchTerm = searchInput.value.toLowerCase();
+    const selectedFilter = document.querySelector('input[name="filter"]:checked').value;
+
+    let filtered = daftarBuku.filter(buku => {
+        const cocokJudul = buku.judul.toLowerCase().includes(searchTerm) || buku.penulis.toLowerCase().includes(searchTerm);
+        const cocokStatus =
+            selectedFilter === "semua" ? true :
+            selectedFilter === "sudah" ? buku.sudahDibaca :
+            !buku.sudahDibaca;
+        return cocokJudul && cocokStatus;
+    });
+
+    tampilkanBuku(filtered);
+}
 // hapus buku
 function hapusBuku(index) {
     daftarBuku.splice(index, 1); // Hapus 1 item berdasarkan index
@@ -136,7 +158,6 @@ formTambahBuku.addEventListener("submit", function(event) {
         daftarBuku.push(bukuBaru);
         localStorage.setItem("daftarBuku", JSON.stringify(daftarBuku));
 
-
         // Reset form
         formTambahBuku.reset();
 
@@ -147,25 +168,3 @@ formTambahBuku.addEventListener("submit", function(event) {
     };
     
 });
-// loop
-filterStatusRadios.forEach(radio => {
-    radio.addEventListener("change", () => {
-        filterDanTampilkan();
-    });
-});
-// fungsi baru untuk menggabungkan filter judul dan status baca
-function filterDanTampilkan() {
-    const searchTerm = searchInput.value.toLowerCase();
-    const selectedFilter = document.querySelector('input[name="filter"]:checked').value;
-
-    let filtered = daftarBuku.filter(buku => {
-        const cocokJudul = buku.judul.toLowerCase().includes(searchTerm) || buku.penulis.toLowerCase().includes(searchTerm);
-        const cocokStatus =
-            selectedFilter === "semua" ? true :
-            selectedFilter === "sudah" ? buku.sudahDibaca :
-            !buku.sudahDibaca;
-        return cocokJudul && cocokStatus;
-    });
-
-    tampilkanBuku(filtered);
-}
