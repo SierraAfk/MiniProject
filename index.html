@@ -1,36 +1,38 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Daftar Buku</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1 id="judul">Halo dunia!!!</h1>
-    <p id="lulus"></p>
-    <p id="nilaiLulus"></p>
-    <p id="rata2nilai"></p>
+    <h1>📚 Daftar Buku</h1>
+
+    <div id="daftarBukuContainer">
+        <ul id="daftarBuku"></ul>
+    </div>
+
+        <div id="filterSection">
+            <div id="filterOptions">
+              <label><input type="radio" name="filter" value="semua" checked> Semua</label>
+              <label><input type="radio" name="filter" value="sudah"> Sudah Dibaca</label>
+              <label><input type="radio" name="filter" value="belum"> Belum Dibaca</label>
+            </div>
+          
+            <div id="searchContainer">
+              <label for="searchBuku">🔍</label>
+              <input type="text" id="searchBuku" placeholder="Cari buku...">
+            </div>
+          </div>
+        
+    <h2>Tambah Buku Baru</h2>
+    <form action="" id="formTambahBuku">
+        <input type="text" id="inputJudul" placeholder="Judul Buku" required>
+        <input type="text" id="inputPenulis" placeholder="Penulis Buku" required>
+        <input type="text" id="inputTahun" placeholder="Tahun Terbit" required>
+        <button type="submit">Tambah Buku</button>
+    </form>
 </body>
-<script src="contact.js"></script>
-<script src="dom.js"></script>
-<!-- <script src="test.js"></script> -->
-=======
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1 id="judul">Halo dunia!!!</h1>
-    <p id="lulus"></p>
-    <p id="nilaiLulus"></p>
-    <p id="rata2nilai"></p>
-</body>
-<script src="contact.js"></script>
-<script src="dom.js"></script>
-<!-- <script src="test.js"></script> -->
->>>>>>> 4ebe28f (progress membuat aplikasi daftar buku)
+<script src="main.js"></script>
 </html>
